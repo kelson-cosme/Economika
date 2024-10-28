@@ -13,20 +13,30 @@ const firebaseConfig = {
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
+
 function Login(){
 
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
-  
+
+    
+    const [carregando, setCarregando] = useState("Entrar")
+
      // Entrar
-  const handleLogin = async (event) => {
+    const handleLogin = async (event) => {
     event.preventDefault();  
+
+    setCarregando("...")
+
+
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, senha);
       const user = userCredential.user;
-      console.log("mimimii")
+      console.log(user)
     } catch (error) {
         console.log(error)
+
+        setCarregando("Entrar")
     }
   };
 
@@ -38,6 +48,7 @@ function Login(){
             // Sign-out successful.
           }).catch((error) => {
             // An error happened.
+            
           });
     }
     
@@ -49,7 +60,7 @@ function Login(){
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                 <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)}/>
 
-            <button type="submit">ENVIAR</button>
+            <button type="submit">{carregando}</button>
 
             </form>
 

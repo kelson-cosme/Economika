@@ -1,0 +1,32 @@
+header{
+    background-color: rgb(13, 6, 98);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    max-width: 1366px;
+    margin: auto;
+
+    position: relative;
+    color: azure;
+
+}
+
+ul{
+    position: absolute;
+    right: 0;
+
+    background-color: brown;
+
+    top: 38px;
+
+    list-style-type: none;
+}
+
+.aparecer{
+    transform: translateX(0%);
+}
+.sumir{
+    transform: translateX(100%);
+}

@@ -1,7 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, getDocs, collection } from "firebase/firestore";
 import { Link } from 'react-router-dom';
+
+import UserContext from "./Context";
+import NavBar from '../navBar/Navbar';
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_API_KEY,
@@ -16,8 +19,11 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 function Home() {
+    const { carrinho, setCarrinho } = useContext(UserContext);
+    
+
     const [produtos, setProdutos] = useState([]); // Inicializando como um array vazio
-    const [carrinho, setCarrinho] = useState([]); // Estado para o carrinho
+    // const [carrinho, setCarrinho] = useState([]); // Estado para o carrinho
 
     const [listaCompras, setListaCompras] = useState([])// A lista de compras
 
@@ -63,6 +69,7 @@ function Home() {
 
     return (
         <>
+            <NavBar />
             {produtos.length > 0 ? (
                 produtos.map((doc, key) => (
                     <div key={key}>
@@ -81,17 +88,8 @@ function Home() {
             )}
             
             <h1>Itens no Carrinho: {carrinho.length}</h1>
-            <ul>
-                {carrinho.map((item, index) => (
-                    <li key={index}>
-                        <h3>{item.unidade} Unidades</h3>
-                        {item.titulo} - R$ {item.preco}
-                    </li>
-                ))}
-            </ul>
 
             <button onClick={comprasFeitas}>Compre Agora</button>
-
 
             <h1>Lista de compras</h1>
             

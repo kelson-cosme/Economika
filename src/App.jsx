@@ -1,14 +1,15 @@
 import './App.css'
-import Rotas from './assets/componentes/rotas/Rotas'
-import UserContext from './assets/componentes/pages/Context'
+import Rotas from "./componentes/rotas/Rotas"
+import UserContext from './componentes/pages/Context'
 import { useState } from 'react';
 
+
 function App() {
-  const [user, setUser] = useState('Usuário Padrão');
+  const [carrinho, setCarrinho] = useState([]);
 
   return (
     <>
-      <UserContext.Provider value={{user: user, setUser}}>
+      <UserContext.Provider value={{carrinho: carrinho, setCarrinho}}>
         < Rotas/>
       </UserContext.Provider>
     </>

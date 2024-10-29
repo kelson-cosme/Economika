@@ -2,15 +2,15 @@ import { useContext } from "react";
 import UserContext from "./Context";
 
 function Teste() {
-    const { user, setUser } = useContext(UserContext);
+    const { carrinho, setCarrinho } = useContext(UserContext);
 
     const alterarUser = () => {
-        setUser('Novo Usuário'); // Altere para o valor desejado
+        setCarrinho('Novo Usuário'); // Altere para o valor desejado
     };
 
     return (
         <>
-            <p>{user}</p>
+            <p>{carrinho}</p>
             <button onClick={alterarUser}>Alterar Usuário</button>
         </>
     );

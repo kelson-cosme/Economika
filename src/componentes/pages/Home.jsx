@@ -41,6 +41,8 @@ function Home() {
         getProdutos();   
     }, []);
 
+
+    
     function adCarrinho(key) {
         const produtoSelecionado = produtos[key];
 
@@ -61,15 +63,9 @@ function Home() {
         });
     }
 
-    function comprasFeitas(){
-        setListaCompras(carrinho)
-
-        console.log(listaCompras)
-    }
-
     return (
         <>
-            <NavBar />
+            <NavBar db={db} app={app} />
             {produtos.length > 0 ? (
                 produtos.map((doc, key) => (
                     <div key={key}>
@@ -88,18 +84,10 @@ function Home() {
             )}
             
             <h1>Itens no Carrinho: {carrinho.length}</h1>
-
-            <button onClick={comprasFeitas}>Compre Agora</button>
-
-            <h1>Lista de compras</h1>
-            
-            {listaCompras.map( (e, index) => 
-                <div key={index}>
-                    <h1>{e.unidade} - {e.titulo} - {e.preco}</h1>
-                </div>
-            )}
         </>
     );
 }
 
 export default Home;
+
+

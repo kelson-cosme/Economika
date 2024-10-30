@@ -8,8 +8,6 @@ import CriarUsuario from "../pages/CriarUsuario"
 
 function Rotas(){
     return(
-
-        <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home/> } />
                 <Route path="/teste" element={<Teste/> } />
@@ -17,7 +15,6 @@ function Rotas(){
                 <Route path="/login" element={<Login/> } />
                 <Route path="/criarusuario" element={<CriarUsuario />} />
             </Routes>
-        </BrowserRouter>
     )
 }
 

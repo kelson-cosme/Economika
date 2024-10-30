@@ -5,9 +5,9 @@ header{
     justify-content: space-between;
     align-items: center;
 
-    max-width: 1366px;
+    width: calc(100% - 80px) ;
+    padding: 0 40px;
     margin: auto;
-
     position: relative;
     color: azure;
 
@@ -19,9 +19,11 @@ ul{
 
     background-color: brown;
 
-    top: 38px;
+    top: 67px;
 
     list-style-type: none;
+
+    transition: all .4s ease-out;
 }
 
 .aparecer{

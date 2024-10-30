@@ -17,7 +17,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-
 function CriarUsuario() {
     const { user, setUser } = useContext(UserContext);
 

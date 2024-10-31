@@ -13,7 +13,7 @@ header{
 
 }
 
-ul{
+.carrinho{
     position: absolute;
     right: 0;
 
@@ -25,7 +25,8 @@ ul{
 
     transition: all .4s ease-out;
 }
-
+.carrinho li{
+}
 .aparecer{
     transform: translateX(0%);
 }

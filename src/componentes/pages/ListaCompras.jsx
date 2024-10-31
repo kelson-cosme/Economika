@@ -1,9 +1,11 @@
 import { initializeApp } from "firebase/app";
-import NavBar from "../navBar/Navbar"
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import NavBar from "../navBar/Navbar";
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // para redirecionamento
 
-import "./ListaCompras.css"
+import "./ListaCompras.css";
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_API_KEY,
@@ -14,33 +16,45 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// Initialize Firestore
 const db = getFirestore(app);
+const auth = getAuth(app); // Initialize Firebase Auth
 
-
-
-function ListaCompras(){
-
-    const [listaCompras, setListaCompras] = useState([]); // Inicializando como um array vazio
+function ListaCompras() {
+    const [listaCompras, setListaCompras] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate(); // Hook para navegação
 
     useEffect(() => {
-
-        async function getProdutos() {
-            const querySnapshot = await getDocs(collection(db, "compras"));
-            let produtosCompras = []; // Array para armazenar os documentos
-            
-            querySnapshot.forEach((doc) => {
-                produtosCompras.push({ ...doc.data(), unidade: 1 }); // Adiciona cada documento com a quantidade inicial de 1
-            }); 
-
-            setListaCompras(produtosCompras); // Atualiza o estado com o array completo
-        }
-        getProdutos();   
+        // Verificar autenticação e buscar compras do usuário
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                navigate("/login"); // Redirecionar para a página de login se não estiver autenticado
+            } else {
+                await fetchCompras(user.uid); // Carregar dados do usuário autenticado
+            }
+            setIsLoading(false);
+        });
     }, []);
 
-    return(
+    async function fetchCompras(uid) {
+        // Cria uma query para buscar somente as compras do usuário autenticado
+        const comprasQuery = query(collection(db, "compras"), where("proprietario", "==", uid));
+        const querySnapshot = await getDocs(comprasQuery);
+        let produtosCompras = [];
+        
+        querySnapshot.forEach((doc) => {
+            produtosCompras.push({ ...doc.data(), unidade: 1 });
+        });
+
+        setListaCompras(produtosCompras);
+    }
+
+    if (isLoading) {
+        return <p>Carregando...</p>; // Mensagem de carregamento
+    }
+
+    return (
         <>
-            
             <NavBar />
 
             <ul className="titulosListaCompras">
@@ -51,22 +65,18 @@ function ListaCompras(){
             </ul>
 
             <ul>
-                {listaCompras && 
+                {listaCompras &&
                     listaCompras.map((e, index) => (
                         <li key={index}>
-                            {e.data}    
+                            {e.data}
                             {e.proprietario}
-                            {e.situacao ? "Ativo" : "Inativo"} 
-                            {console.log(e)}
+                            {e.situacao ? "Ativo" : "Inativo"}
                         </li>
-                    
-                    ))
-                }
-            </ul>        
-                
-
+                    ))}
+            </ul>
         </>
-    )
+    );
 }
 
-export default ListaCompras
+export default ListaCompras;
+

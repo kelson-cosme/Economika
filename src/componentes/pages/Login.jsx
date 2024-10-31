@@ -2,7 +2,8 @@
 
   import { initializeApp } from 'firebase/app';
   import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
-  import { Navigate, useNavigate } from "react-router-dom";
+  import { useNavigate } from "react-router-dom";
+
 
   const firebaseConfig = {
       apiKey: import.meta.env.VITE_API_KEY,
@@ -19,8 +20,8 @@
 
       const [email, setEmail] = useState("")
       const [senha, setSenha] = useState("")
-
-      
+      const navigate = useNavigate(); // Hook para navegação
+  
       const [carregando, setCarregando] = useState("Entrar")
 
       // Entrar
@@ -33,12 +34,14 @@
       try {
         const userCredential = await signInWithEmailAndPassword(auth, email, senha);
         const user = userCredential.user;
+        alert("Login feito com Sucesso")
+        navigate("/")
 
-        console.log(user)
       } catch (error) {
           console.log(error)
-
           setCarregando("Entrar")
+          alert("Erro ao fazer Login")
+
       }
     };
 

@@ -16,7 +16,7 @@ function NavBar({db, app}) {
     function fecharCarrinho() {
         const user = auth.currentUser; // Verifica se há um usuário logado
         
-        if (user) {
+        if (user && carrinho.length > 0) {
             // Somente executa a adição ao Firebase se o usuário estiver logado
             const date = new Date();
             addDoc(collection(db, "compras"), {
@@ -27,7 +27,7 @@ function NavBar({db, app}) {
             });
             console.log("Compra finalizada com sucesso.");
         } else {
-            alert("Por favor, faça login para finalizar a compra.");
+            alert("Carrinho vazio ou usuário não Autenticado");
         }
     }
 
@@ -64,7 +64,7 @@ function NavBar({db, app}) {
     return (
         <>
             <header>
-                <div><h1>LOGO</h1></div>
+                <div> <Link to={"/"}>LOGO</Link></div>
                 <nav>
                     <button><Link to={"/login"}>Login</Link></button>
 
@@ -82,6 +82,9 @@ function NavBar({db, app}) {
                                     {item.titulo} - R$ {item.preco}
                                 </li>
                             ))}
+
+                            {carrinho && console.log(carrinho.length)}
+
                             <button onClick={fecharCarrinho}>Fechar carrinho</button>
                         </ul>
                     )}

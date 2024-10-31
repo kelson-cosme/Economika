@@ -1,0 +1,15 @@
+.titulosListaCompras{
+
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.titulosListaCompras li{
+    width: 20%;
+    background-color: #F8CB00;
+    align-items: center;
+    text-align: center;
+}

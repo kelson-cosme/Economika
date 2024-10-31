@@ -3,7 +3,7 @@
 import { useContext, useId, useState } from "react";
 import UserContext from "../pages/Context";
 import "./Navbar.css";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import { addDoc, collection} from "firebase/firestore";
 import { Link } from "react-router-dom";
 
@@ -13,8 +13,6 @@ function NavBar({db, app}) {
     const [carrinhoVisivel, setCarrinhoVisivel] = useState(false);
     
     const auth = getAuth(app);
-        console.log(carrinho)
-    
     function fecharCarrinho() {
         const user = auth.currentUser; // Verifica se há um usuário logado
         

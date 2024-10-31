@@ -20,8 +20,6 @@ const db = getFirestore(app);
 
 function Home() {
     const { carrinho, setCarrinho } = useContext(UserContext);
-    
-
     const [produtos, setProdutos] = useState([]); // Inicializando como um array vazio
     // const [carrinho, setCarrinho] = useState([]); // Estado para o carrinho
 
@@ -40,7 +38,6 @@ function Home() {
         }
         getProdutos();   
     }, []);
-
 
     
     function adCarrinho(key) {
@@ -63,6 +60,7 @@ function Home() {
         });
     }
 
+    
     return (
         <>
             <NavBar db={db} app={app} />

@@ -89,7 +89,7 @@ function Home() {
             </section>
 
             
-            <h1>Itens no Carrinho: {carrinho.length}</h1>
+            {/* <h1>Itens no Carrinho: {carrinho.length}</h1> */}
         </>
     );
 }

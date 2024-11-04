@@ -4,6 +4,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import UserContext from "./Context";
 
+import "./CriarUsuario.css"
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -62,23 +63,25 @@ function CriarUsuario() {
     // criarUsuario();
 
   return (
-    <>
-      <h1>Criar Usuário</h1>
-        <h1>{user}</h1>
-        <form action="" onSubmit={criarUsuario}>
-            <input onChange={(e) => setEmail(e.target.value)} type="gmail" />
-            <input type="password" onChange={(e) => setPassword(e.target.value)} />
-            <input type="number" onChange={(e) => setCpf(e.target.value)} />
-            <input type="number" onChange={(e) => setTelefone(e.target.value)} />
+    <section className="criarUsuarios">
+      <div className="criarUsuarioDentro">
+        <h1>Criar Usuário</h1>
+          <h1>{user}</h1>
+          <form onSubmit={criarUsuario}>
+              <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} type="gmail" />
+              <input placeholder="Senha" type="password" onChange={(e) => setPassword(e.target.value)} />
+              <input placeholder="Cpf" type="number" onChange={(e) => setCpf(e.target.value)} />
+              <input placeholder="Telefone" type="number" onChange={(e) => setTelefone(e.target.value)} />
 
-            <button type="submit">Criar Usuário</button>
-        </form>
+              <button type="submit">Criar Usuário</button>
+          </form>
 
-        {success ? `${success}` : error && error}
+          {success ? `${success}` : error && error}
+      </div>
 
       {/* {success && <p style={{ color: "green" }}>{success}</p>}
       {error && <p style={{ color: "red" }}>{error}</p>} */}
-    </>
+    </section>
   );
 }
 

@@ -3,8 +3,8 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import UserContext from "./Context";
-
 import "./CriarUsuario.css"
+import { Link } from "react-router-dom";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -65,6 +65,9 @@ function CriarUsuario() {
   return (
     <section className="criarUsuarios">
       <div className="criarUsuarioDentro">
+
+      <div className="voltar"><Link to={"/"}>Voltar</Link></div>
+
         <h1>Criar Usuário</h1>
           <h1>{user}</h1>
           <form onSubmit={criarUsuario}>

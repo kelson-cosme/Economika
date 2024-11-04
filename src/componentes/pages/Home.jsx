@@ -87,6 +87,14 @@ function Home() {
                     <p>Carregando produtos...</p>
                 )}
             </section>
+            <h1>teste</h1>
+      <h1>teste</h1>
+      <h1>teste</h1>
+      <h1>teste</h1>
+      <h1>teste</h1>
+      <h1>teste</h1>
+      <h1>teste</h1>
+      <h1>teste</h1>
 
             
             {/* <h1>Itens no Carrinho: {carrinho.length}</h1> */}

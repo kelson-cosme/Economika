@@ -26,6 +26,11 @@ header{
 .carrinho{
     position: absolute;
     right: 0;
+    overflow: visible;
+
+    height: 30vh;
+    overflow-y: scroll;
+
 
     background-color: rgb(255, 255, 255);
     padding: 20px;

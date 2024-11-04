@@ -80,7 +80,7 @@ function CriarUsuario() {
           </form>
 
           {success ? `${success}` : error && error}
-      </div>
+      </div>    
 
       {/* {success && <p style={{ color: "green" }}>{success}</p>}
       {error && <p style={{ color: "red" }}>{error}</p>} */}

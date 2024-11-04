@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import UserContext from "./Context";
 import NavBar from '../navBar/Navbar';
 
+import "./Home.css"
+
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_API_KEY,
     authDomain: import.meta.env.VITE_AUTH,
@@ -21,7 +23,6 @@ const db = getFirestore(app);
 function Home() {
     const { carrinho, setCarrinho } = useContext(UserContext);
     const [produtos, setProdutos] = useState([]); // Inicializando como um array vazio
-    // const [carrinho, setCarrinho] = useState([]); // Estado para o carrinho
 
     const [listaCompras, setListaCompras] = useState([])// A lista de compras
 
@@ -64,22 +65,29 @@ function Home() {
     return (
         <>
             <NavBar db={db} app={app} />
-            {produtos.length > 0 ? (
-                produtos.map((doc, key) => (
-                    <div key={key}>
-                        <Link to={`detalhes/${doc.titulo}/${doc.id}`}>
-                            <h1>{doc.titulo}</h1>
-                            <p>R$ {doc.preco}</p>
-                        </Link>
+            <h1>Mais Vendidos</h1>
 
-                        <button onClick={() => adCarrinho(key)}> 
-                            Adicionar ao carrinho
-                        </button>
-                    </div>
-                ))
-            ) : (
-                <p>Carregando produtos...</p>
-            )}
+            <section className='maisVendidos'>
+                {produtos.length > 0 ? (
+                    produtos.map((doc, key) => (
+                        <div key={key}>
+                            <Link to={`detalhes/${doc.titulo}/${doc.id}`}>
+                                <img src={doc.imagem} alt="" />
+                                <h1>{doc.titulo}</h1>
+                                <p>R$ {doc.preco}</p>
+
+                            </Link>
+
+                            <button onClick={() => adCarrinho(key)}> 
+                                Adicionar ao carrinho
+                            </button>
+                        </div>
+                    ))
+                ) : (
+                    <p>Carregando produtos...</p>
+                )}
+            </section>
+
             
             <h1>Itens no Carrinho: {carrinho.length}</h1>
         </>

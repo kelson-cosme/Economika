@@ -3,7 +3,9 @@
   import { initializeApp } from 'firebase/app';
   import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
   import { useNavigate } from "react-router-dom";
+  import { Link } from "react-router-dom";
 
+  import "./Login.css"
 
   const firebaseConfig = {
       apiKey: import.meta.env.VITE_API_KEY,
@@ -47,14 +49,25 @@
 
       return(
           <>
-              <form onSubmit={handleLogin}>
-                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                  <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)}/>
 
-              <button onClick={handleLogin}>{carregando}</button>
-        
+            <div className="formPai">
+
+
+              <form onSubmit={handleLogin} className="formLogin">
+
+                <div className="voltar"><Link to={"/"}>Voltar</Link></div>
+
+                <h1>Login</h1>
+
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)}/>
+
+                <button onClick={handleLogin}>{carregando}</button>
+
+                <p>Não tem acesso? <Link to={"/criarusuario"}>Crie aqui</Link> </p>
               </form>
-
+            </div>
+              
           </>
       )
   }

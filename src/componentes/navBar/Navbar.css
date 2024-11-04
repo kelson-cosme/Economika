@@ -1,29 +1,59 @@
 header{
-    background-color: rgb(13, 6, 98);
-
+    background: rgb(248,203,0);
+    background: linear-gradient(90deg, rgba(248,203,0,1) 0%, rgba(176,11,17,1) 100%);
+    
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     width: calc(100% - 80px) ;
-    padding: 0 40px;
+    padding: 22px 40px;
     margin: auto;
     position: relative;
     color: azure;
 
-}
 
+}
+.navegacao{
+    display: flex;
+}
+.navegacao button{
+    margin: 0 20px;
+    color: #ffff;
+
+    cursor: pointer;
+}
 .carrinho{
     position: absolute;
     right: 0;
 
-    background-color: brown;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 0px 0 20px 20px;
+    color: #222224;
 
-    top: 67px;
+    top: 86px;
 
     list-style-type: none;
 
     transition: all .4s ease-out;
+
+
+    img{
+        width: 1em;
+        display: flex;
+    }
+}
+
+
+.carrinho h3{
+    display: flex;
+    align-items: center;
+}
+.carrinho li{
+    border-bottom: 1px solid black;
+
+    margin: 20px 0; 
 }
 
 .aparecer{
@@ -31,4 +61,80 @@ header{
 }
 .sumir{
     transform: translateX(100%);
+}
+.buttonUser{
+    background-color: rgba(23, 22, 22, 0);
+    border: none;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+.buttonCarrinho{
+    background-color: rgba(23, 22, 22, 0);
+    border: none;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+strong{
+    color: #F8CB00;
+    font-weight: 0;
+}
+.buttonSair{
+    background-color: rgba(23, 22, 22, 0);
+    border: none;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+.buttonBag{
+    background-color: rgba(23, 22, 22, 0);
+    border: none;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.user{
+    width: 2em;
+    height: 2em;
+    background-image: url("../../assets/user.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.cart{
+    width: 2em;
+    height: 2em;
+    background-image: url("../../assets/cart.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.sair{
+    width: 2em;
+    height: 2em;
+    background-image: url("../../assets/logout.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bag{
+    width: 2em;
+    height: 2em;
+    background-image: url("../../assets/bag.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.fecharCarrinho{
+    background-color: #2BDA5D;
+    border: none;
+    padding: 5px 10px;
+
 }

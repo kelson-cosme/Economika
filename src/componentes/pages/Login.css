@@ -1,0 +1,65 @@
+.formLogin{
+    background-color: #F8CB00;
+    position: relative;
+    width: 80vh;
+    height: 60vh;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    font-size: 1vh;
+
+    border-radius: 4vh;
+    h1{
+        font-size: 3.5vh;
+        color: #ffff;
+    }
+
+    p{
+        font-size: 1.6vh;
+
+        margin-top: 2vh;
+    }
+}
+
+
+.formLogin input{
+    width: 65%;
+    padding: 1vh;
+    border: none;
+
+    margin: 1vh;
+    height: 2vh;
+
+    font-size: 2vh;
+
+    border-radius: 1vh;
+}
+.voltar{
+    position: absolute;
+
+    margin: 3vh;
+
+    top: 0;
+    left: 0;
+}
+.formLogin button{
+        border: none;
+
+        font-size: 2vh;
+        padding: 1vh 7vh;
+        background-color: #2BDA5D;
+        color: #ffff;
+        border-radius: 1vh;
+        cursor: pointer;
+}
+.formPai{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}  

@@ -5,13 +5,17 @@ import UserContext from "../pages/Context";
 import "./Navbar.css";
 import { getAuth, signOut } from "firebase/auth";
 import { addDoc, collection} from "firebase/firestore";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import Menos from "../../assets/menos.png"
+import Mais from "../../assets/mais.png"
 
 
 function NavBar({db, app}) {
     const { carrinho, setCarrinho } = useContext(UserContext);
     const [carrinhoVisivel, setCarrinhoVisivel] = useState(false);
-    
+    const navigate = useNavigate(); // Hook para navegação
+
     const auth = getAuth(app);
     function fecharCarrinho() {
         const user = auth.currentUser; // Verifica se há um usuário logado
@@ -25,7 +29,7 @@ function NavBar({db, app}) {
                 situacao: false,
                 proprietario: user.uid
             });
-            console.log("Compra finalizada com sucesso.");
+            alert("Compra finalizada com sucesso.");
         } else {
             alert("Carrinho vazio ou usuário não Autenticado");
         }
@@ -65,11 +69,20 @@ function NavBar({db, app}) {
         <>
             <header>
                 <div> <Link to={"/"}>LOGO</Link></div>
-                <nav>
-                    <button><Link to={"/login"}>Login</Link></button>
+                <nav className="navegacao">
+                    <button onClick={() => navigate("/login")} className="buttonUser">
+                        <div className="user"></div>
+                        <p>Login</p>
+                    </button>
 
-                    <button onClick={() => setCarrinhoVisivel(!carrinhoVisivel)}>
-                        Ver carrinho ({carrinho.length})
+                    <button className="buttonSair" onClick={sair}>
+                        <div className="sair"></div>
+                        <p>Sair</p>
+                    </button>
+
+                    <button className="buttonCarrinho" onClick={() => setCarrinhoVisivel(!carrinhoVisivel)}>
+                        <div className="cart"></div>                       
+                        <p>Carrinho <strong>({carrinho.length})</strong> </p> 
                     </button>
 
                     {carrinhoVisivel && (
@@ -77,19 +90,22 @@ function NavBar({db, app}) {
                             {carrinho.map((item, index) => (
                                 <li key={index}>
                                     
-                                    <h3><button onClick={() => diminuirCarrinho(item, index) }>-</button>{item.unidade} Unidades<button onClick={() => aumentarCarrinho(item, index)}>+</button></h3>
+                                    <h3><button onClick={() => diminuirCarrinho(item, index) }> <img src={Menos} alt="" /> </button>{item.unidade} Unidades<button onClick={() => aumentarCarrinho(item, index)}> <img src={Mais} alt="" /> </button></h3>
                                     
                                     {item.titulo} - R$ {item.preco}
                                 </li>
                             ))}
 
-                            {carrinho && console.log(carrinho.length)}
-
-                            <button onClick={fecharCarrinho}>Fechar carrinho</button>
+                            {carrinho.length > 0 ? <button className="fecharCarrinho" style={{display: "block"}} onClick={fecharCarrinho}>Fechar carrinho</button> : <button style={{display: "none"}} onClick={fecharCarrinho}>Fechar carrinho</button>}
+                            
                         </ul>
                     )}
 
-                    <button onClick={sair}>Sair</button>
+                    <button onClick={() => navigate("/compras")} className="buttonBag">
+                        <div className="bag"></div>    
+                        <p>Compras</p>
+                    </button>
+               
                 </nav>
             </header>
         </>

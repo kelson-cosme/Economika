@@ -23,7 +23,15 @@
     }
 
 }
-.imagemTamanho{
+/* .imagemTamanho{
     width: 12em;
     height: 12em;
+} */
+
+@media screen and (max-width: 767px) {
+    .maisVendidos{
+        margin: 10px;
+        padding: 20px;
+    }
+
 }

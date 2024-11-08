@@ -47,7 +47,7 @@ function Home() {
 
         function handleResize(){
             if(window.innerWidth < 720){
-                setSlidesPerView(2)
+                setSlidesPerView(1)
             } else if (window.innerWidth >= 720 && window.innerWidth < 1023) {
                 setSlidesPerView(3)
             } else{

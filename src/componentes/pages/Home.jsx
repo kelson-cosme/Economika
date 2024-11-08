@@ -2,6 +2,8 @@ import { useEffect, useState, useContext } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, getDocs, collection } from "firebase/firestore";
 import { Link } from 'react-router-dom';
+import {Swiper, SwiperSlide} from "swiper/react"
+import 'swiper/css';
 
 import UserContext from "./Context";
 import NavBar from '../navBar/Navbar';
@@ -65,39 +67,42 @@ function Home() {
     return (
         <>
             <NavBar db={db} app={app} />
-            <h1>Mais Vendidos</h1>
+
+
+
+            <main className='banner'>
+
+            </main>
+
 
             <section className='maisVendidos'>
+            <h1>Mais Vendidos</h1>
+
                 {produtos.length > 0 ? (
-                    produtos.map((doc, key) => (
-                        <div key={key}>
-                            <Link to={`detalhes/${doc.titulo}/${doc.id}`}>
-                                <img src={doc.imagem} alt="" />
-                                <h1>{doc.titulo}</h1>
-                                <p>R$ {doc.preco}</p>
+                    <Swiper slidesPerView={3} pagination={{ clickable:true }} navigation>
+                        {produtos.map( (doc, key) => (
+                                <SwiperSlide key={doc.id}>
+                                <div className='itens' key={key}>
+                                    <Link to={`detalhes/${doc.titulo}/${doc.id}`}>
+                                        <img src={doc.imagem} alt="" />
+                                        <h1>{doc.titulo}</h1>
+                                        <p>R$ {doc.preco}</p>
 
-                            </Link>
+                                    </Link>
 
-                            <button onClick={() => adCarrinho(key)}> 
-                                Adicionar ao carrinho
-                            </button>
-                        </div>
-                    ))
+                                    <button onClick={() => adCarrinho(key)}> 
+                                        Adicionar ao carrinho
+                                    </button>
+                                </div>
+                                </SwiperSlide>
+                                )
+                            )
+                        }
+                    </Swiper>
                 ) : (
                     <p>Carregando produtos...</p>
                 )}
             </section>
-            <h1>teste</h1>
-      <h1>teste</h1>
-      <h1>teste</h1>
-      <h1>teste</h1>
-      <h1>teste</h1>
-      <h1>teste</h1>
-      <h1>teste</h1>
-      <h1>teste</h1>
-
-            
-            {/* <h1>Itens no Carrinho: {carrinho.length}</h1> */}
         </>
     );
 }

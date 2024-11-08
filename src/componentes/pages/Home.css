@@ -1,10 +1,20 @@
 .maisVendidos{
-    display: flex;
-    justify-content: space-around;
-
-    div img{
-        width: 15em;
+    background-color: #ffff;
+    padding: 3em;
+    border-radius: 25px;
+    margin: 3em;
+    
+    .itens{
+        width: 100%;
     }
+    .itens img{
+        margin: auto;
+        width: 100%;
+    }
+    h1{
+        margin-bottom: 12px;
+    }
+
     a{
         text-decoration: none;
         color: black;

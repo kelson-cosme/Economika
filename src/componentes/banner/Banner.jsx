@@ -2,7 +2,10 @@ import banner1 from "../../assets/banner1.png"
 import {Swiper, SwiperSlide} from "swiper/react"
 import 'swiper/css';
 
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+
 import "./Banner.css"
+
 
 const banners = [
     {id: "1", image: banner1},
@@ -17,7 +20,11 @@ function Banner(){
     return(
         <>  
            {banners.length > 0 ? (
-                    <Swiper slidesPerView={1} pagination={{ clickable:true }} >
+                    <Swiper centeredSlides={true}         
+                    autoplay={{
+                        delay: 3500,
+                        disableOnInteraction: false,
+                      }} slidesPerView={1} pagination={{ clickable:true }} >
                         {banners.map( (doc, key) => (
                                 <SwiperSlide key={doc.id}>
                                 <div className='bannerPrincipal' key={key}>

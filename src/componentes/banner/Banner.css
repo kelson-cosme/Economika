@@ -1,0 +1,15 @@
+.bannerPrincipal{
+    margin-top: 60px;
+    /* width: 100%; */
+    width: 100%;
+}
+.bannerPrincipal img{
+    width: 100%;
+    height: auto;
+
+}
+.imagemTamanho{
+    width: 100%;
+    height: auto;
+
+}

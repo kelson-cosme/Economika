@@ -9,6 +9,8 @@ import UserContext from "./Context";
 import NavBar from '../navBar/Navbar';
 
 import "./Home.css"
+import Banner from '../banner/Banner';
+
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_API_KEY,
@@ -28,6 +30,8 @@ function Home() {
 
     const [listaCompras, setListaCompras] = useState([])// A lista de compras
 
+    const [slidesPerView, setSlidesPerView] = useState()
+
     useEffect(() => {
         async function getProdutos() {
             const querySnapshot = await getDocs(collection(db, "produtos"));
@@ -40,6 +44,24 @@ function Home() {
             setProdutos(produtosArray); // Atualiza o estado com o array completo
         }
         getProdutos();   
+
+        function handleResize(){
+            if(window.innerWidth < 720){
+                setSlidesPerView(2)
+            } else if (window.innerWidth >= 720 && window.innerWidth < 1023) {
+                setSlidesPerView(3)
+            } else{
+                setSlidesPerView(5)
+            }
+        }
+        handleResize(); 
+
+        window.addEventListener("resize", handleResize)
+
+        return () => {
+            window.removeEventListener("resize", handleResize)
+        }
+
     }, []);
 
     
@@ -71,20 +93,23 @@ function Home() {
 
 
             <main className='banner'>
-
+                <Banner />
             </main>
 
 
             <section className='maisVendidos'>
             <h1>Mais Vendidos</h1>
-
                 {produtos.length > 0 ? (
-                    <Swiper slidesPerView={3} pagination={{ clickable:true }} navigation>
+                    <Swiper slidesPerView={slidesPerView} pagination={{ clickable:true }} navigation>
                         {produtos.map( (doc, key) => (
                                 <SwiperSlide key={doc.id}>
                                 <div className='itens' key={key}>
                                     <Link to={`detalhes/${doc.titulo}/${doc.id}`}>
-                                        <img src={doc.imagem} alt="" />
+
+                                        <div className='imagemTamanho'>
+                                            <img src={doc.imagem} alt="" />
+                                        </div>
+
                                         <h1>{doc.titulo}</h1>
                                         <p>R$ {doc.preco}</p>
 

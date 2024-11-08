@@ -5,6 +5,10 @@
   import { useNavigate } from "react-router-dom";
   import { Link } from "react-router-dom";
 
+  import Bebela from "../../assets/bebela.webp"
+  import Chico from "../../assets/chico.webp"
+  import Mika from "../../assets/mika.webp"
+
   import "./Login.css"
 
   const firebaseConfig = {
@@ -52,6 +56,9 @@
 
             <div className="formPai">
 
+              <img className="mika" src={Mika} alt="" />
+
+              <img className="mascote bebela" src={Bebela} alt="" />
 
               <form onSubmit={handleLogin} className="formLogin">
 
@@ -66,6 +73,9 @@
 
                 <p>Não tem acesso? <Link to={"/criarusuario"}>Crie aqui</Link> </p>
               </form>
+
+              <img className="mascote chico" src={Chico} alt="" />
+
             </div>
               
           </>

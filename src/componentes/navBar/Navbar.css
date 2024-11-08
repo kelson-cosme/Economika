@@ -12,7 +12,6 @@ header{
     position: relative;
     color: azure;
 
-
 }
 .navegacao{
     display: flex;
@@ -24,6 +23,8 @@ header{
     cursor: pointer;
 }
 .carrinho{
+    z-index: 9999;
+
     position: absolute;
     right: 0;
     overflow: visible;

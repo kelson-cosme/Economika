@@ -63,3 +63,53 @@
     align-items: center;
     justify-content: center;
 }  
+.mascote{
+    position: fixed;
+    width: 35vh;
+    z-index: 9;
+}
+
+.bebela{
+    left: 39vh;
+    top: 28vh;
+}
+.chico{
+    width: 30vh;
+    right: 42vh;
+    top: 30vh;
+}
+.mika{
+    width: 9vh;
+    position: fixed;
+    top: 23vh;
+    right: 67vh;
+
+    z-index: 99;
+}
+@media screen and (max-width: 767px) {
+    .formLogin{
+        margin: 20px;
+        height: 40vh;
+
+    }
+    .bebela{
+        left: -2vh;
+        top: 44vh;
+        width: 15vh;
+        
+    }
+    .chico{
+        width: 12vh;
+        right: -3vh;
+        top: 35vh;
+    }
+    .mika{
+        width: 5vh;
+        position: fixed;
+        top: 33vh;
+        right: 5vh;
+    
+        z-index: 99;
+    }
+
+}

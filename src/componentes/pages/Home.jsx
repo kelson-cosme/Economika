@@ -1,9 +1,11 @@
 import { useEffect, useState, useContext } from 'react';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, getDocs, collection } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 import { Link } from 'react-router-dom';
 import {Swiper, SwiperSlide} from "swiper/react"
 import 'swiper/css';
+
+import ProdutosContext from '../contextProdutos/ProdutosContext';
 
 import UserContext from "./Context";
 import NavBar from '../navBar/Navbar';
@@ -25,43 +27,33 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 function Home() {
-    const { carrinho, setCarrinho } = useContext(UserContext);
-    const [produtos, setProdutos] = useState([]); // Inicializando como um array vazio
+    const { setCarrinho } = useContext(UserContext);
 
-    const [listaCompras, setListaCompras] = useState([])// A lista de compras
+    const [slidesPerView, setSlidesPerView] = useState(3)
 
-    const [slidesPerView, setSlidesPerView] = useState()
+    const { produtos } = useContext(ProdutosContext);
 
+
+    
     useEffect(() => {
-        async function getProdutos() {
-            const querySnapshot = await getDocs(collection(db, "produtos"));
-            let produtosArray = []; // Array para armazenar os documentos
-            
-            querySnapshot.forEach((doc) => {
-                produtosArray.push({ ...doc.data(), unidade: 1 }); // Adiciona cada documento com a quantidade inicial de 1
-            }); 
-
-            setProdutos(produtosArray); // Atualiza o estado com o array completo
-        }
-        getProdutos();   
-
-        function handleResize(){
-            if(window.innerWidth < 720){
-                setSlidesPerView(1)
+        function handleResize() {
+            if (window.innerWidth < 720) {
+                setSlidesPerView(1);
             } else if (window.innerWidth >= 720 && window.innerWidth < 1023) {
-                setSlidesPerView(3)
-            } else{
-                setSlidesPerView(5)
+                setSlidesPerView(3);
+            } else {
+                setSlidesPerView(4);
             }
         }
-        handleResize(); 
-
-        window.addEventListener("resize", handleResize)
-
+    
+        // Chama handleResize para atualizar o estado na montagem
+        handleResize();
+    
+        window.addEventListener("resize", handleResize);
+    
         return () => {
-            window.removeEventListener("resize", handleResize)
-        }
-
+            window.removeEventListener("resize", handleResize);
+        };
     }, []);
 
     
@@ -93,36 +85,35 @@ function Home() {
 
 
             <main className='banner'>
-                <Banner />
+                {/* <Banner /> */}
             </main>
 
 
             <section className='maisVendidos'>
-            <h1>Mais Vendidos</h1>
+                <h1>Mais Vendidos</h1>
                 {produtos.length > 0 ? (
-                    <Swiper slidesPerView={slidesPerView} pagination={{ clickable:true }} navigation>
-                        {produtos.map( (doc, key) => (
-                                <SwiperSlide key={doc.id}>
-                                <div className='itens' key={key}>
-                                    <Link to={`detalhes/${doc.titulo}/${doc.id}`}>
+                    <Swiper slidesPerView={slidesPerView} pagination={{ clickable: true }} navigation>
+                    {produtos.map((doc, key) => (
+                        <SwiperSlide key={doc.id}>
 
-                                        <div className='imagemTamanho'>
-                                            <img src={doc.imagem} alt="" />
-                                        </div>
-
-                                        <h1>{doc.titulo}</h1>
-                                        <p>R$ {doc.preco}</p>
-
-                                    </Link>
-
-                                    <button onClick={() => adCarrinho(key)}> 
-                                        Adicionar ao carrinho
-                                    </button>
+                        <div className='itens'>
+                            <Link to={`detalhes/${doc.titulo}/${doc.id}`}>
+                                <div className='imagemTamanho'>
+                                    <img src={doc.imagem} alt="" />
                                 </div>
-                                </SwiperSlide>
-                                )
-                            )
-                        }
+
+                                <h1>{doc.titulo}</h1>
+
+                                <p>R$ {doc.preco}</p>
+                            </Link>
+                            
+                            <button onClick={ () => adCarrinho(key)}>
+                                Adicionar ao carrinho
+                            </button>
+                        </div>
+
+                        </SwiperSlide>
+                    ))}
                     </Swiper>
                 ) : (
                     <p>Carregando produtos...</p>
@@ -131,7 +122,5 @@ function Home() {
         </>
     );
 }
-
 export default Home;
-
 

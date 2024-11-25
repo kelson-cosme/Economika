@@ -11,15 +11,9 @@
 
   import "./Login.css"
 
-  const firebaseConfig = {
-      apiKey: import.meta.env.VITE_API_KEY,
-      authDomain: import.meta.env.VITE_AUTH,
-      projectId: import.meta.env.VITE_ID,
-      storageBucket: import.meta.env.VITE_STORAGE,
-    };
+  import { app,  } from '../firebaseConfig/firebaseConfig';
 
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
+  const auth = getAuth(app);
 
       
   function Login(){

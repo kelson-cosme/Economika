@@ -1,26 +1,19 @@
-import './App.css'
-import Rotas from "./componentes/rotas/Rotas"
-import UserContext from './componentes/pages/Context'
-import { useState } from 'react';
+import './App.css';
+import Rotas from "./componentes/rotas/Rotas";
 import { BrowserRouter } from 'react-router-dom';
-
 import { ProdutosProvider } from './componentes/contextProdutos/ProdutosContext';
+import { UserProvider } from './componentes/pages/Context'; // Certifique-se de importar corretamente
 
 function App() {
-  const [carrinho, setCarrinho] = useState([]);
-
-  return (
-    <>
-      <BrowserRouter>
-
-        <UserContext.Provider value={{carrinho: carrinho, setCarrinho}}>
-          <ProdutosProvider>
-            < Rotas/>
-          </ProdutosProvider>    
-        </UserContext.Provider>
+    return (
+        <BrowserRouter>
+            <UserProvider>
+                <ProdutosProvider>
+                    <Rotas />
+                </ProdutosProvider>
+            </UserProvider>
         </BrowserRouter>
-    </>
-  )
+    );
 }
 
-export default App
+export default App;

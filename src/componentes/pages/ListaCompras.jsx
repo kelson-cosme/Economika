@@ -4,19 +4,10 @@ import NavBar from "../navBar/Navbar";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // para redirecionamento
+import { app, db } from '../firebaseConfig/firebaseConfig';
 
 import "./ListaCompras.css";
 
-const firebaseConfig = {
-    apiKey: import.meta.env.VITE_API_KEY,
-    authDomain: import.meta.env.VITE_AUTH,
-    projectId: import.meta.env.VITE_ID,
-    storageBucket: import.meta.env.VITE_STORAGE,
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 const auth = getAuth(app); // Initialize Firebase Auth
 
 function ListaCompras() {
@@ -34,7 +25,7 @@ function ListaCompras() {
             }
             setIsLoading(false);
         });
-    }, []);
+    }, [listaCompras]);
 
     async function fetchCompras(uid) {
         // Cria uma query para buscar somente as compras do usuário autenticado

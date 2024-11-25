@@ -1,40 +1,19 @@
 import { useEffect, useState, useContext } from 'react';
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from "firebase/firestore";
 import { Link } from 'react-router-dom';
-import {Swiper, SwiperSlide} from "swiper/react"
+import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
-
+import { app, db } from '../firebaseConfig/firebaseConfig';
 import ProdutosContext from '../contextProdutos/ProdutosContext';
-
 import UserContext from "./Context";
 import NavBar from '../navBar/Navbar';
 
-import "./Home.css"
-import Banner from '../banner/Banner';
-
-
-const firebaseConfig = {
-    apiKey: import.meta.env.VITE_API_KEY,
-    authDomain: import.meta.env.VITE_AUTH,
-    projectId: import.meta.env.VITE_ID,
-    storageBucket: import.meta.env.VITE_STORAGE,
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-// Initialize Firestore
-const db = getFirestore(app);
+import "./Home.css";
 
 function Home() {
-    const { setCarrinho } = useContext(UserContext);
-
-    const [slidesPerView, setSlidesPerView] = useState(3)
-
+    const { adCarrinho } = useContext(UserContext); // Consumir o contexto corretamente
+    const [slidesPerView, setSlidesPerView] = useState(3);
     const { produtos } = useContext(ProdutosContext);
 
-
-    
     useEffect(() => {
         function handleResize() {
             if (window.innerWidth < 720) {
@@ -45,75 +24,42 @@ function Home() {
                 setSlidesPerView(4);
             }
         }
-    
-        // Chama handleResize para atualizar o estado na montagem
+
         handleResize();
-    
         window.addEventListener("resize", handleResize);
-    
+
         return () => {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
 
-    
-    function adCarrinho(key) {
-        const produtoSelecionado = produtos[key];
-
-        setCarrinho((prevCarrinho) => {
-            const itemExistente = prevCarrinho.find((item) => item.titulo === produtoSelecionado.titulo);
-            
-            if (itemExistente) {
-                // Atualiza a unidade do item existente
-                return prevCarrinho.map((item) => 
-                    item.titulo === produtoSelecionado.titulo 
-                        ? { ...item, unidade: item.unidade + 1 }
-                        : item
-                );
-            } else {
-                // Adiciona o produto como um novo item no carrinho
-                return [...prevCarrinho, { ...produtoSelecionado, unidade: 1 }];
-            }
-        });
-    }
-
-    
     return (
         <>
             <NavBar db={db} app={app} />
-
-
-
-            <main className='banner'>
-                {/* <Banner /> */}
-            </main>
-
+            <main className='banner'></main>
 
             <section className='maisVendidos'>
                 <h1>Mais Vendidos</h1>
                 {produtos.length > 0 ? (
                     <Swiper slidesPerView={slidesPerView} pagination={{ clickable: true }} navigation>
-                    {produtos.map((doc, key) => (
-                        <SwiperSlide key={doc.id}>
+                        {produtos.map((doc) => (
+                            <SwiperSlide key={doc.id}>
+                                <div className='itens'>
+                                    <Link to={`detalhes/${doc.titulo}/${doc.id}`}>
+                                        <div className='imagemTamanho'>
+                                            <img src={doc.imagem} alt="" />
+                                        </div>
 
-                        <div className='itens'>
-                            <Link to={`detalhes/${doc.titulo}/${doc.id}`}>
-                                <div className='imagemTamanho'>
-                                    <img src={doc.imagem} alt="" />
+                                        <h1>{doc.titulo}</h1>
+                                        <p>R$ {doc.preco}</p>
+                                    </Link>
+
+                                    <button onClick={() => adCarrinho(doc)}> {/* Enviando o produto completo */}
+                                        Adicionar ao carrinho
+                                    </button>
                                 </div>
-
-                                <h1>{doc.titulo}</h1>
-
-                                <p>R$ {doc.preco}</p>
-                            </Link>
-                            
-                            <button onClick={ () => adCarrinho(key)}>
-                                Adicionar ao carrinho
-                            </button>
-                        </div>
-
-                        </SwiperSlide>
-                    ))}
+                            </SwiperSlide>
+                        ))}
                     </Swiper>
                 ) : (
                     <p>Carregando produtos...</p>
@@ -122,5 +68,5 @@ function Home() {
         </>
     );
 }
-export default Home;
 
+export default Home;

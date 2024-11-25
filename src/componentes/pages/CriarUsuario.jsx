@@ -6,17 +6,10 @@ import UserContext from "./Context";
 import "./CriarUsuario.css"
 import { Link } from "react-router-dom";
 
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_API_KEY,
-  authDomain: import.meta.env.VITE_AUTH,
-  projectId: import.meta.env.VITE_ID,
-  storageBucket: import.meta.env.VITE_STORAGE,
-};
+import { app, db } from '../firebaseConfig/firebaseConfig';
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+
 const auth = getAuth(app);
-const db = getFirestore(app);
 
 function CriarUsuario() {
     const { user, setUser } = useContext(UserContext);

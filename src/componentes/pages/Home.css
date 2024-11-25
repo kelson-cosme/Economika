@@ -5,7 +5,9 @@
         margin: 3em;
         
         .itens{
-            width: 100%;
+            width: calc(100% - 50px);
+
+            padding: 25px;
         }
         .itens img{
             margin: auto;

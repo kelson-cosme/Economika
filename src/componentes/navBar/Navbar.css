@@ -14,7 +14,7 @@ header{
 
 }
 .logo{
-    width: 7em;
+    width: 5em;
 }
 .logo img{
     width: 100%;
@@ -171,12 +171,10 @@ strong{
     }
     .navegacao{
         justify-content: space-around;
-        position: absolute;
+        /* position: absolute; */
         right: 0;
 
-        top: 5em;
-        background-color: rgba(0, 0, 0, 0.726);
-        padding: 10px;
+        margin: 0 10px;
         border-radius: 0px 0px 15px 15px;
 
         width: 50vw;

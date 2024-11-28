@@ -7,10 +7,11 @@ import ProdutosContext from '../contextProdutos/ProdutosContext';
 import UserContext from "./Context";
 import NavBar from '../navBar/Navbar';
 
+import { motion } from "motion/react"
+
 import "./Home.css";
 
 function Home() {
-    const { adCarrinho } = useContext(UserContext); // Consumir o contexto corretamente
     const [slidesPerView, setSlidesPerView] = useState(3);
     const { produtos } = useContext(ProdutosContext);
 
@@ -40,30 +41,29 @@ function Home() {
 
             <section className='maisVendidos'>
                 <h1>Mais Vendidos</h1>
-                {produtos.length > 0 ? (
-                    <Swiper slidesPerView={slidesPerView} pagination={{ clickable: true }} navigation>
-                        {produtos.map((doc) => (
-                            <SwiperSlide key={doc.id}>
-                                <div className='itens'>
-                                    <Link to={`detalhes/${doc.titulo}/${doc.id}`}>
-                                        <div className='imagemTamanho'>
-                                            <img src={doc.imagem} alt="" />
-                                        </div>
 
-                                        <h1>{doc.titulo}</h1>
-                                        <p>R$ {doc.preco}</p>
-                                    </Link>
+                    {produtos.length > 0 ? (
+                        <Swiper slidesPerView={slidesPerView} pagination={{ clickable: true }} navigation>
+                            {produtos.map((doc) => (
+                                <SwiperSlide key={doc.id}>
+                                    <div className='itens'>
+                                        <Link to={`detalhes/${doc.titulo}/${doc.id}`}>
+                                            <div className='imagemTamanho'>
+                                                <img src={doc.imagem} alt="" />
+                                            </div>
 
-                                    <button onClick={() => adCarrinho(doc)}> {/* Enviando o produto completo */}
-                                        Adicionar ao carrinho
-                                    </button>
-                                </div>
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
-                ) : (
-                    <p>Carregando produtos...</p>
-                )}
+                                            <h1>{doc.titulo}</h1>
+                                            <p>R$ {doc.preco}</p>
+                                        </Link>
+                                    </div>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    ) : (
+                        <p>Carregando produtos...</p>
+                    )}
+
+
             </section>
         </>
     );

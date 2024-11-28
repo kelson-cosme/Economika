@@ -9,6 +9,7 @@ import { app, db } from '../firebaseConfig/firebaseConfig';
 
 import Menos from "../../assets/menos.png";
 import Mais from "../../assets/mais.png";
+import Logo from "../../assets/logo_EconoMika.png"
 
 function NavBar() {
     const { carrinho, setCarrinho, adCarrinho } = useContext(UserContext); // Inclui adCarrinho
@@ -68,8 +69,10 @@ function NavBar() {
         <>
 
             <header>
-                <div>
-                    <Link to={"/"}>LOGO</Link>
+                <div className="logo">
+                    <Link to={"/"}>
+                        <img src={Logo} alt="" />
+                    </Link>
                 </div>
                 <nav className="navegacao">
                     {auth.currentUser == null ? (
@@ -106,14 +109,19 @@ function NavBar() {
                                         <button onClick={() => diminuirCarrinho(item, index)}>
                                             <img src={Menos} alt="" />
                                         </button>
-                                            <img className="miniProduto" src={item.imagem} alt="" />
-                                            {console.log(item.imagem)}
-                                            {item.unidade} Unidades
+
+                                            <div className="miniCarrinho">
+                                                <img className="miniProduto" src={item.imagem} alt="" />
+                                                    {item.titulo}   <br />
+                                                    {/* R$ {item.preco} <br /> */}
+                                                    {item.unidade} Unidades 
+
+                                            </div>
+                                            
                                         <button onClick={() => adCarrinho(item)}>
                                             <img src={Mais} alt="" />
                                         </button>
                                     </h3>
-                                    {item.titulo} - R$ {item.preco}
                                 </li>
                             ))}
 

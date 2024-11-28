@@ -1,17 +1,16 @@
   import { useEffect, useState } from "react"
 
-  import { initializeApp } from 'firebase/app';
   import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
   import { useNavigate } from "react-router-dom";
   import { Link } from "react-router-dom";
 
-  import Bebela from "../../assets/bebela.webp"
-  import Chico from "../../assets/chico.webp"
   import Mika from "../../assets/mika.webp"
 
   import "./Login.css"
 
-  import { app,  } from '../firebaseConfig/firebaseConfig';
+  import { motion } from "motion/react";
+
+  import { app } from '../firebaseConfig/firebaseConfig';
 
   const auth = getAuth(app);
 
@@ -48,11 +47,10 @@
       return(
           <>
 
-            <div className="formPai">
+            <motion.div className="formPai" initial={{ opacity: 0.5, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}  >
 
               <img className="mika" src={Mika} alt="" />
-
-              <img className="mascote bebela" src={Bebela} alt="" />
 
               <form onSubmit={handleLogin} className="formLogin">
 
@@ -67,10 +65,7 @@
 
                 <p>Não tem acesso? <Link to={"/criarusuario"}>Crie aqui</Link> </p>
               </form>
-
-              <img className="mascote chico" src={Chico} alt="" />
-
-            </div>
+            </motion.div>
               
           </>
       )

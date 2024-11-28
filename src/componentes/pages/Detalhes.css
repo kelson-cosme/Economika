@@ -4,12 +4,16 @@
     width: calc(100% - 50px);
     
     margin: auto;
+
+    margin-top: 30px;
 }
 .produtoLeft{
     width: 60%;
 }
 .produtoLeft img {
+    margin: 15px 0;
     width: 100%;
+
 }
 .produtoRight{
     width: 25%;
@@ -30,5 +34,14 @@
         padding: 13px 0;
         font-size: 17px;
         border-radius: 7px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .produtoDetalhes{
+        flex-direction: column;
+
+        div{
+            width: 100%;
+        }
     }
 }

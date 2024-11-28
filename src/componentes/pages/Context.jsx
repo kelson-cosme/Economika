@@ -22,6 +22,8 @@ export const UserProvider = ({ children }) => {
                 return [...prevCarrinho, { ...produto, unidade: 1 }];
             }
         });
+
+        alert("Item adicionado com sucesso...")
     };
 
     return (

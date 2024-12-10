@@ -11,3 +11,4 @@ Projeto de uma aplicação web para ecommerce, desenvolvida com React e Firebase
 ## O objetivo do projeto é oferecer uma experiência de compra online funcional e eficiente, aplicando boas práticas de desenvolvimento e organização de código.
 
 ### Páginas
+<img src="./desafio-01/assets/design/codelandia.jpg">

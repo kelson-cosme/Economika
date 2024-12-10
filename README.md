@@ -9,3 +9,5 @@ Projeto de uma aplicação web para ecommerce, desenvolvida com React e Firebase
 * Interface responsiva e otimizada para dispositivos móveis.
 
 ## O objetivo do projeto é oferecer uma experiência de compra online funcional e eficiente, aplicando boas práticas de desenvolvimento e organização de código.
+
+### Páginas

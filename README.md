@@ -23,7 +23,7 @@ Projeto de uma aplicação web para ecommerce, desenvolvida com React e Firebase
 <img src="./src//assets/detalhes.png">
 
 ### Carrinho
-<img src="./src//assets/carrinho.png">
+<img src="./src//assets/carringo.png">
 
 ### Compras
 <img src="./src//assets/compras.png">

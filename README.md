@@ -29,4 +29,8 @@ Projeto de uma aplicação web para ecommerce, desenvolvida com React e Firebase
 <img src="./src//assets/compras.png">
 
 
+### Proximas atualizações
+* Estilizar melhor a pagina de compras
+* Usuário ADM para administrar as compras
+* Adicionar método de pagamento
 
